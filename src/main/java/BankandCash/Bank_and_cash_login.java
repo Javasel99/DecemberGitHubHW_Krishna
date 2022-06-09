@@ -1,17 +1,18 @@
 package BankandCash;
 
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Bank_and_cash_login {
+	
 	static	WebDriver driver;
 
-	@BeforeClass
-	public static  void launchBrowser() {
+	@Before
+	public  void launchBrowser() throws InterruptedException {
 		System.out.println("This is before method");
 		System.setProperty("webdriver.chrome.driver","drivers\\chromedriver102.exe");
 		driver = new ChromeDriver();
@@ -22,12 +23,10 @@ public class Bank_and_cash_login {
 		driver.findElement(By.id("password")).sendKeys("abc123"); // identify Password and data insertion
 		driver.findElement(By.name("login")).click(); // identify Signin element and click
 		driver.findElement(By.partialLinkText("Bank & Cash")).click(); // for bank and cash button
-
-		driver.findElement(By.partialLinkText("New Account")).click(); // for new account
-
 	}
 	@Test
 	public void loginTest() throws InterruptedException {
+		driver.findElement(By.partialLinkText("New Account")).click(); // for new account
 		driver.findElement(By.id("account")).sendKeys("December_checking");
 		driver.findElement(By.id("description")).sendKeys("Salary");
 		driver.findElement(By.id("balance")).sendKeys("$2100");
@@ -39,11 +38,11 @@ public class Bank_and_cash_login {
 		Thread.sleep(4000);
 		driver.findElement(By.xpath("//button[@class ='btn btn-primary']")).click();
 		//driver.findElement(By.id("submit")).submit();
+	
 		Thread.sleep(3000);
-
 	}
 	@After
 	public void tearDown() {
-	driver.close();
+		driver.close();
 }
 }
